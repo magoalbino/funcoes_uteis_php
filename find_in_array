@@ -2,6 +2,16 @@
 
 $notas = [1,2,3,4,5,3,5];
 
+//remove apenas o primeiro valor encontrado
+if (($key = array_search(5, $notas)) !== false) {
+    unset($notas[$key]);
+}
+
+$notas = array_values($notas); //reindexa o array
+print_r($notas);
+
+//----------------------
+
 //remove todos os valores encontrados no array e reindexa
 function removeArrayByValue($value, $arr) {
     
@@ -15,12 +25,26 @@ function removeArrayByValue($value, $arr) {
 $teste2 = removeArrayByValue(5,$notas);
 print_r($teste2);
 
-//-----------------------
+//----------------------
 
-//remove apenas o primeiro valor encontrado
-if (($key = array_search(5, $notas)) !== false) {
-    unset($notas[$key]);
+//faz a mesma coisa mas de forma recursiva para arrays múltiplos
+function removeArrayByValueRecursive($arr, $value) {
+    foreach ($arr as $k => &$v) {
+        if (is_array($v)) {
+            $v = removeArrayByValueRecursive($v, $value);
+        }
+    }
+    
+    return 
+    array_filter($arr, function($v, $k) use ($value){
+        
+        if ($value != $v) {
+            return $v;
+        }
+        return null;
+            //return $value != $v ? $v : null;
+        }, ARRAY_FILTER_USE_BOTH);   
 }
 
-$notas = array_values($notas); //reindexa o array
-print_r($notas);
+$teste2 = removeArrayByValueRecursive($notas2, 3);
+print_r($teste2);
