@@ -3,3 +3,25 @@
 //transforma uma string de horário em formato 12 horas com AM/PM em formato 24 horas
 
 echo date('H:i:s', strtotime('07:05:45PM'));
+
+
+// ------------------------------------
+
+//mesma função em javascript:
+const convertTime12to24 = (time12h) => {
+  const modifier = time12h.match(/[a-z]+/i)[0];
+  const time = time12h.match(/[0-9:]+/)[0];
+
+  let [hours, minutes, seconds] = time.split(':');
+
+  if (hours === '12') {
+    hours = '00';
+  }
+
+  if (modifier === 'PM') {
+    hours = parseInt(hours, 10) + 12;
+  }
+
+  return `${hours}:${minutes}:${seconds}`;
+}
+convertTime12to24('07:05:45PM')
