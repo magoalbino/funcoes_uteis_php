@@ -10,6 +10,18 @@ if (($key = array_search(5, $notas)) !== false) {
 $notas = array_values($notas); //reindexa o array
 print_r($notas);
 
+// 000000000000000
+// em javascript esse array precisa ser clonado, caso contrário o array original será alterado
+function filterArray2(a, value) {
+    var index = a.indexOf(value);
+    var cloneArr = a.slice()
+    if (index !== -1) {
+       cloneArr.splice(index,1);
+    }
+    return cloneArr
+}
+// 000000000000000
+
 //----------------------
 
 //remove todos os valores encontrados no array e reindexa
@@ -24,6 +36,15 @@ function removeArrayByValue($value, $arr) {
 
 $teste2 = removeArrayByValue(5,$notas);
 print_r($teste2);
+
+// 000000000000000000000
+// javascript
+function filterArray(arr, value) {
+    return arr.filter((v) => {
+        return v !== value
+    })
+}
+// 00000000000000000000
 
 //----------------------
 
