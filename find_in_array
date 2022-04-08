@@ -1,0 +1,26 @@
+<?php
+
+$notas = [1,2,3,4,5,3,5];
+
+//remove todos os valores encontrados no array e reindexa
+function removeArrayByValue($value, $arr) {
+    
+    return 
+    array_filter($arr, function($v, $k) use ($value){ // use ($value) serve para trazer os valores externos à função anônima
+            return $value != $v ? $v : null;
+        }, ARRAY_FILTER_USE_BOTH);
+            
+}
+
+$teste2 = removeArrayByValue(5,$notas);
+print_r($teste2);
+
+//-----------------------
+
+//remove apenas o primeiro valor encontrado
+if (($key = array_search(5, $notas)) !== false) {
+    unset($notas[$key]);
+}
+
+$notas = array_values($notas); //reindexa o array
+print_r($notas);
