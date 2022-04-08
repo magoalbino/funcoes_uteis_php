@@ -1,0 +1,5 @@
+<?php
+
+//transforma uma string de horário em formato 12 horas com AM/PM em formato 24 horas
+
+echo date('H:i:s', strtotime('07:05:45PM'));
